@@ -2,6 +2,7 @@ const express=require('express');
 const mongoose=require('mongoose');
 const dotenv = require('dotenv');
 const productRouter=require('./routes/productRoutes');
+const cartRouter=require('./routes/cartRoutes')
 // created the server
 const app=express();
 dotenv.config();
@@ -22,6 +23,7 @@ app.get('/health',async(req,res)=>{
 app.use(express.json());
 
 app.use('/product',productRouter);
+app.use('/cart',cartRouter);
 
 
 
