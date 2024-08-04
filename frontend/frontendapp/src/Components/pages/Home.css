@@ -1,0 +1,9 @@
+.products-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: space-around;
+    padding: 15px;
+    box-sizing: border-box;
+}

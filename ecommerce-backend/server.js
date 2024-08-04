@@ -3,8 +3,12 @@ const mongoose=require('mongoose');
 const dotenv = require('dotenv');
 const productRouter=require('./routes/productRoutes');
 const cartRouter=require('./routes/cartRoutes')
+const userRouter=require('./routes/userRoutes')
+const orderRouter=require('./routes/orderRoutes')
+var cors = require('cors')
 // created the server
 const app=express();
+app.use(cors());
 dotenv.config();
 
 const port = process.env.PORT || 8080;
@@ -24,6 +28,8 @@ app.use(express.json());
 
 app.use('/product',productRouter);
 app.use('/cart',cartRouter);
+app.use('/user',userRouter);
+app.use('/order',orderRouter);
 
 
 
