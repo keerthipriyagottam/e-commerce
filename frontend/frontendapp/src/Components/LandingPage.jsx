@@ -6,13 +6,14 @@ import Home from './pages/Home.jsx';
 
 const LandingPage = () => {
     const [showLogin, setShowLogin] = useState(true);
+    // const[showprofile,setShowprofile]=useState(true);
 
 
     
     
     return (
         <div>
-            <Navbar showLogin={showLogin} setShowLogin={setShowLogin}/>
+            <Navbar showLogin={showLogin} setShowLogin={setShowLogin} />
             <Register showLogin={showLogin} />
             {/* <ProductTile/> */}
         </div>

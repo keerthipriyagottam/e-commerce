@@ -1,0 +1,91 @@
+.cart-main-container{
+    display: flex;
+    flex-direction:row;
+    justify-content:start ;
+    gap: 20px;
+    align-items:start;
+    margin-top:70px;
+    width: 100%;
+    margin: auto;
+    max-width:40%;
+    padding: 20px;
+    border-radius: 10px;
+    background-color:rgb(251, 251, 251); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd; 
+}
+
+.cart-left img{
+        height: 100px;
+        width: 100px;
+        object-fit: contain;
+}
+.cart-productname {
+    font-size:20px;
+    font-weight: 500;
+    color: black;
+    text-align:start;
+    cursor: pointer;
+    padding-top: 0;
+}
+
+.cart-price{
+    font-size:30px;
+    font-weight: 600;
+    color:  #4caf50;
+    text-align:start;
+    padding-top: 10px;
+}
+.cart-total{
+    font-size:18px;
+    font-weight: 500;
+    color: black;
+    text-align:start;
+    cursor: pointer;
+    padding-top: 10px;
+}
+.payment{
+    font-size:18px;
+    font-weight: 500;
+    color: rgb(254, 94, 94);
+    text-align:start;
+    cursor: pointer;
+    padding-top: 10px;
+}
+
+
+.quantity-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.quantity-button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.quantity-button:hover {
+    background-color:orange;
+}
+.deletebutton:hover{
+    background-color: red;
+}
+
+input[type="number"] {
+    width: 30px;
+    text-align: center;
+    font-size: 18px;
+}
+
+label {
+    font-size: 18px;
+    font-weight: 500;
+    color: black;
+    margin-right: 10px;
+}

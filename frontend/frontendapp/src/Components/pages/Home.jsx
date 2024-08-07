@@ -2,6 +2,8 @@ import React, { useState ,useEffect}  from 'react'
 import Navbar from './Navbar'
 import ProductTile from '../ProductTile'
 import './Home.css'
+import Shoppingcart from '../Shoppingcart'
+import ProductDetail from '../ProductDetail'
 
 const Home = () => {
     const[products,setProducts]=useState([]);
@@ -32,11 +34,12 @@ const Home = () => {
   return (
     <div>
         <Navbar/>
-        <div className='products-container'>
+        <div className='products-container' >
             {products.map((product)=>(
-                <ProductTile title={product.name} image={product.image} price={product.salePrice}/>
+                <ProductTile id={product._id} title={product.name} image={product.image} price={product.salePrice}/>
             ))}
         </div>
+        
     </div>
   )
 }

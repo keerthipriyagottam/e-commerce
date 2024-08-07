@@ -31,7 +31,9 @@
     color: #333333; /* Dark gray for the title */
     text-align: center;
     cursor: pointer;
+    text-decoration: none;
 }
+
 
 .product-price {
     margin-top: auto;

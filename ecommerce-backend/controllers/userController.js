@@ -1,5 +1,4 @@
 const userCollection=require('../models/userSchema');
-const cartCollection=require('../models/cartSchema');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const dotenv=require('dotenv');
@@ -13,16 +12,13 @@ const secretKey=process.env.secretKey;
 const register=async(req,res)=>{
     try {
         const {password,name,email}=req.body;
-        const newCart = new cartCollection({items: []});
-        const newCartResponse = await newCart.save();
-        const newCartId = newCartResponse._id;
         const hashedPassword = await bcrypt.hash(password, 10);
         const user=new userCollection({
             password: hashedPassword,
             email,
             name,
             address:[],
-            cart:newCartId
+            cartItems:[]
         })
         const userResponse= await user.save()
         res.status(200).json(userResponse);
@@ -36,12 +32,11 @@ const login=async(req,res)=>{
     const{email,password}=req.body;
     try{
         const userAvailable=await userCollection.findOne({email});
-        console.log(userAvailable)
         if(!userAvailable ||!await(bcrypt.compare(password,userAvailable.password)) ){
             res.status(400).json({message:"invalid credentials"})
         } else {
             const token=jwt.sign({userId:userAvailable._id},secretKey,{expiresIn:"1h"})
-            res.status(200).json({succes:"Login Successful",token});
+            res.status(200).json({succes:"Login Successful",token,userId:userAvailable._id});
             console.log("Token Generated",token);
         }
     }

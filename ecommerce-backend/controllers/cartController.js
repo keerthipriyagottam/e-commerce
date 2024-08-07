@@ -1,27 +1,14 @@
-const cartCollection = require('../models/cartSchema');
+const userCollection = require('../models/userSchema');
 
-// API to create cart
-const createCart = async(req,res)=>{
+// API to get cart by userId
+const cartByUserId = async(req,res)=>{
     try {
-        const newCart = new cartCollection({items: []});
-        const response = await newCart.save();
-        res.status(200).json(response);
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({message:`Internal Error: Contact support`});
-    }
-}
-
-// API to get cart by cartId
-const cartById = async(req,res)=>{
-    try {
-        
-        const cartId = req.params.id;
-        const showCartById = await cartCollection.findById(cartId);
+        const userId = req.params.userid;
+        const showCartById = await userCollection.findById(userId);
         if(!showCartById){
             res.status(400).json("Invalid Id details");
         }
-        res.status(200).json(showCartById);
+        res.status(200).json(showCartById.cartItems);
 
         
     } catch (error) {
@@ -36,16 +23,16 @@ const cartById = async(req,res)=>{
 const cartUpdate = async(req,res)=>{
     try {
         const {items}=req.body;
-        const cartById=req.params.id;
+        const userId=req.params.userid;
         // Validate input
         if (!Array.isArray(items) || items.length === 0) {
             return res.status(400).json({ error: 'Invalid items array' });
         }
 
-        if (!cartById) {
+        if (!userId) {
             return res.status(400).json({ error: 'Cart ID is required' });
         }
-        const itemUpdate = await cartCollection.updateOne({_id:cartById},{$set:{items:items}});
+        const itemUpdate = await userCollection.updateOne({_id:userId},{$set:{cartItems:items}});
         if(!itemUpdate){
             res.status(400).json("item not updated")
         }
@@ -62,4 +49,4 @@ const cartUpdate = async(req,res)=>{
 
 
 
-module.exports={createCart,cartById,cartUpdate};
+module.exports={cartByUserId,cartUpdate};

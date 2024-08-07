@@ -16,13 +16,19 @@ const userSchema = mongoose.Schema({
         type:String,
         required:true
     },
-    cart:{
-        type:mongoose.Schema.Types.ObjectId,
-            ref:'cart',
-            required: true
-    },
-
-
+    cartItems:
+        [{
+            productId:
+            {
+                type:mongoose.Schema.Types.ObjectId,
+                ref:'products',
+                required: true
+            },
+            quantity: {
+                type: Number,
+                required: true
+            }
+        }]
 });
 
 const User = mongoose.model("user",userSchema);

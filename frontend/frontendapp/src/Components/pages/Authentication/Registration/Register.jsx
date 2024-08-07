@@ -2,7 +2,6 @@ import { useState } from "react";
 import React from 'react';
 import './Register.css';
 import { useNavigate } from 'react-router-dom'; 
-import ProductTile from "../../../ProductTile";
 
 const Register = ({ showLogin }) => {
     const [password, setPassword] = useState('');
@@ -33,15 +32,17 @@ const Register = ({ showLogin }) => {
             });
 
             const result = await response.json();
+            console.log(result)
 
             if (response.ok) {
                 if (showLogin) {
                     setSuccess('Login successful!');
+                    localStorage.setItem("userId",result.userId)
                     Navigate('/home')
   
                 } else {
                     setSuccess('Registration successful!');
-                    Navigate('/home')
+                    Navigate('/')
                 }
                 setPassword('');
                 setName('');
