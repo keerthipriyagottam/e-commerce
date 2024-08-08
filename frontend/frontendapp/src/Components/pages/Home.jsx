@@ -27,8 +27,6 @@ const Home = () => {
     useEffect(
         ()=>{
             getAllProducts();
-            console.log('done with useEffect');
-            console.log(products);
         }, []);
 
   return (
