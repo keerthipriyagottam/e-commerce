@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react'
+import { updateCart } from '../utility/updateCart';
 
 import './ProductDetail.css'
 
 const ProductDetail = ({id}) => {
+  const userId = localStorage.getItem('userId');
   const[product,setProduct]=useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const handleAddToCart=()=>{
+    updateCart(userId,product._id,1);
+  }
   useEffect(()=>{
     const productFetching = async() => {
       setLoading(true);
@@ -57,7 +62,7 @@ const ProductDetail = ({id}) => {
           <p>{product.shipping}</p>
           <p>{product.categories}</p>
         </div>
-        <button className='add-to-cart-button'>Add to Cart</button>
+        <button className='add-to-cart-button' onClick={()=>handleAddToCart()}>Add to Cart</button>
       </div>
   </div>
   )

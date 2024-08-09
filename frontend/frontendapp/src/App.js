@@ -1,13 +1,12 @@
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import LandingPage from './Components/LandingPage';
-import ProductDetail from './Components/ProductDetail';
-import ProductTile from './Components/ProductTile';
-import OrderDetails from './Components/OrderDetails';
 import OrderHistory from './Components/OrderHistory';
-import Register from './Components/pages/Authentication/Registration/Register';
 import Home from './Components/pages/Home';
 import ProductDetailpage from './Components/ProductDetailpage.jsx';
 import CartPage from './Components/CartPage';
+import AdminHome from './Components/AdminHome.jsx';
+import AddProduct from './Components/AddProduct.jsx';
+import DeleteProducts from './Components/DeleteProducts.jsx';
 
 
 function App() {
@@ -19,6 +18,10 @@ function App() {
                 <Route path="/home" element={<Home />} />
                 <Route path="/product/:id" element={<ProductDetailpage/>}/>
                 <Route path='/cart' element={<CartPage/>}/>
+                <Route path='/orderHistory' element={<OrderHistory/>}/>
+                <Route path='/admin/addProduct' element={<AddProduct/>}/>
+                <Route path='/admin/home' element={<AdminHome/>}/>
+                <Route path='/admin/deleteProduct' element={<DeleteProducts/>}/>
             </Routes>
         </Router>
    

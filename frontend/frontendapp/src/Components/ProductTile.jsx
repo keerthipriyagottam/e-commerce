@@ -1,28 +1,29 @@
 // ProductTile.js
-import React, { useState } from 'react';
 import './ProductTile.css';
 import { Link } from 'react-router-dom';
-import { fetchCart } from '../utility/fetchCart';
 import { updateCart } from '../utility/updateCart';
 
-const ProductTile = ({ id,image, title, price }) => {
+const ProductTile = ({ reloadCartPage, pageType,id,image, title, price }) => {
+  const handleDelete=async()=>{
+    try {
+      const response= await fetch(`http://localhost:8080/product/deleteProduct/${id}`,{
+          method:'DELETE',
+          headers:{'Content-Type': 'application/json'} 
+      });
+      if(response.ok) {
+        console.log('Product deleted successfully');
+        await reloadCartPage();
+      } else {
+          console.error('An error occurred while deleting product');
+      }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+  }
+
   const handleAddToCart=async ()=>{
     const userId=localStorage.getItem("userId");
-    const currentCartContent = await fetchCart(userId);
-    let productExistsInCart = false;
-    for(let i=0; i<currentCartContent.length; i++) {
-      if(currentCartContent[i].productId === id) {
-        productExistsInCart = true;
-        currentCartContent[i].quantity = currentCartContent[i].quantity + 1;
-        break;
-      }
-    }
-
-    let updatedCartContent = currentCartContent;
-    if(!productExistsInCart) {
-      updatedCartContent = [...currentCartContent, {productId: id, quantity: 1}];
-    }
-    await updateCart(userId, updatedCartContent);
+    await updateCart(userId, id, 1);
   }
 
   return (
@@ -35,7 +36,8 @@ const ProductTile = ({ id,image, title, price }) => {
       
       <div className='product-price'>Price: <strong>&#8377;{price}</strong></div>
       <div className='product-button'>
-        <button onClick={handleAddToCart}>Add to Cart</button>
+        {pageType!=='admin' && <button onClick={handleAddToCart}>Add to Cart</button>}
+        {pageType==='admin' && <button onClick={handleDelete}>Delete Product</button>}
       </div>
     </div>
   );

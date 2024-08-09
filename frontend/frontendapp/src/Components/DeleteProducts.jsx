@@ -1,11 +1,9 @@
 import React, { useState ,useEffect}  from 'react'
-import Navbar from './Navbar'
-import ProductTile from '../ProductTile'
-import './Home.css'
+import AdminNavBar from './AdminNavBar'
+import ProductTile from './ProductTile';
 
-const Home = () => {
-    const[triggerEffect,setTriggerEffect]=useState(false);
-    const[products,setProducts]=useState([]);
+const DeleteProducts = () => {
+  const[products,setProducts]=useState([]);
     const getAllProducts=async()=>{
         try {
             const response= await fetch('http://localhost:8080/product/allProducts',{
@@ -23,26 +21,20 @@ const Home = () => {
             console.error('Error:', error);
         }
     }
-    const toggleTriggerEffect=() => {
-        setTriggerEffect(prevState => !prevState);
-      };
-
     useEffect(
         ()=>{
             getAllProducts();
-        }, [triggerEffect]);
-
+        }, []);
   return (
-    <div>
-        <Navbar/>
+    <>
+        <AdminNavBar/>
         <div className='products-container' >
             {products.map((product)=>(
-                <ProductTile key={product._id} reloadCartPage={toggleTriggerEffect} id={product._id} title={product.name} image={product.image} price={product.salePrice}/>
+                <ProductTile pageType='admin' key={product._id} id={product._id} title={product.name} image={product.image} price={product.salePrice}/>
             ))}
         </div>
-        
-    </div>
+    </>
   )
 }
 
-export default Home
+export default DeleteProducts

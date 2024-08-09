@@ -22,7 +22,6 @@ const Register = ({ showLogin }) => {
 
         try {
             const endpoint = `http://localhost:8080/user/${showLogin ? 'login' : 'register'}`;
-            console.log(endpoint)
             const response = await fetch(endpoint, {
                 method: 'POST',
                 headers: {
@@ -32,7 +31,6 @@ const Register = ({ showLogin }) => {
             });
 
             const result = await response.json();
-            console.log(result)
 
             if (response.ok) {
                 if (showLogin) {

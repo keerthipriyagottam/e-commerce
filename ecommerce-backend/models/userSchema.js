@@ -4,10 +4,6 @@ const userSchema = mongoose.Schema({
         type:String,
         required:true
     },
-    address:[{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'address'
-    }],
     email:{
         type:String,
         required:true

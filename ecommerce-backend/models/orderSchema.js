@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-const CompleteAddress = require('./addressSchema');
-const Product = require('./productSchema');
 const orderSchema = mongoose.Schema({
     userId:{
         type:mongoose.Schema.Types.ObjectId,
@@ -14,6 +12,10 @@ const orderSchema = mongoose.Schema({
             ref:'products',
             required: true
         },
+        productName: {
+            type: String,
+            required: true
+        },
         quantity: {
             type: Number,
             required: true
@@ -24,9 +26,8 @@ const orderSchema = mongoose.Schema({
         required:true
     },
     address:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'address',
-        required: false
+        type:String,
+        required: true
     },
     datePlaced:{
         type:Date,

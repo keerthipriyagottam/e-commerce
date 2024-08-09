@@ -1,0 +1,42 @@
+/* OrderItem.css */
+
+.order-item-container {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    border: 2px solid black;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 80%;
+    overflow: hidden;
+  }
+  
+  .header {
+    border-bottom: 2px solid #eee;
+    margin-bottom: 15px;
+    background-color: bisque;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 16px;
+    color: black;
+  }
+  
+  .header div:first-child {
+    font-weight: bold;
+  }
+  
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .content div {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  

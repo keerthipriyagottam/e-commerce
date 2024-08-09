@@ -13,7 +13,7 @@ const LandingPage = () => {
     
     return (
         <div>
-            <Navbar showLogin={showLogin} setShowLogin={setShowLogin} />
+            <Navbar showLogin={showLogin} setShowLogin={setShowLogin} pageType='landingPage'/>
             <Register showLogin={showLogin} />
             {/* <ProductTile/> */}
         </div>

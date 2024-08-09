@@ -1,4 +1,5 @@
 const userCollection = require('../models/userSchema');
+const productCollection=require('../models/productSchema')
 
 // API to get cart by userId
 const cartByUserId = async(req,res)=>{
@@ -17,6 +18,31 @@ const cartByUserId = async(req,res)=>{
     }
 }
 
+// API to get cart Products
+const cartProductsByUserId = async(req,res)=>{
+    try {
+        const userId = req.params.userid;
+        const showCartById = await userCollection.findById(userId);
+        const cart=showCartById.cartItems;
+        const productIds = cart.map(item => item.productId.toString());
+        
+        const products = await productCollection.find({ _id: { $in: productIds } });
+        const result = products.map(p=>{
+            const cartItem = cart.find(cartItem => cartItem.productId.toString() === p._id.toString());
+            return {
+                _id:p._id,
+                productName: p.name,
+                price: p.salePrice,
+                image: p.image,
+                quantity:cartItem ? cartItem.quantity : 0
+            }
+        });
+        res.status(200).json(result)
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({message:`Internal Error: Contact support`});
+    }
+}
 
 
 // API to update cart from content in body
@@ -25,7 +51,7 @@ const cartUpdate = async(req,res)=>{
         const {items}=req.body;
         const userId=req.params.userid;
         // Validate input
-        if (!Array.isArray(items) || items.length === 0) {
+        if (!Array.isArray(items)) {
             return res.status(400).json({ error: 'Invalid items array' });
         }
 
@@ -49,4 +75,5 @@ const cartUpdate = async(req,res)=>{
 
 
 
-module.exports={cartByUserId,cartUpdate};
+
+module.exports={cartByUserId,cartUpdate,cartProductsByUserId};

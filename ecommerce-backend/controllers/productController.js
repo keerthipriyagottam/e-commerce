@@ -1,4 +1,6 @@
 const productCollection = require('../models/productSchema');
+const { ObjectId } = require('mongodb');
+
 
 //API to show all products
 const getAllProducts = async(req,res)=>{
@@ -45,6 +47,21 @@ const addProducts = async(req,res)=>{
     
 }
 
+//API to deelete product
+const deleteProductById = async(req,res)=>{
+    try{
+        const id = req.params.id;
+        const result = await productCollection.deleteOne({ _id: new ObjectId(id) });
+        if (result.deletedCount === 1) {
+            return res.status(200).json({ message: 'Product deleted successfully' });
+          } else {
+            return res.status(404).json({ error: 'Product not found' });
+          }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({message:`Internal Error: Contact support`});
+    }
+}
 
 
 
@@ -53,4 +70,5 @@ const addProducts = async(req,res)=>{
 
 
 
-module.exports = {getAllProducts,getProductById,addProducts}
+
+module.exports = {getAllProducts,getProductById,addProducts,deleteProductById}
