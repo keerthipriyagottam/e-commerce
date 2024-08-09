@@ -36,7 +36,7 @@ const OrderItem = ({pageType,date,address,orderStatus,products,orderId}) => {
             </div>
             {pageType === 'admin' &&
                 <div className='deliver-button'>
-                    <button onClick={deliverOrder}>Deliver</button>
+                    <button onClick={deliverOrder} disabled={updatedOrderStatus === deliveredStatus}>Deliver</button>
                 </div>
             }
             

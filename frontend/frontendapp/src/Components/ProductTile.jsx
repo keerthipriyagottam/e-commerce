@@ -12,11 +12,7 @@ const ProductTile = ({ pageType,id,reloadPage,image, title, price }) => {
       });
       if(response.ok) {
         console.log('Product deleted successfully');
-        if (typeof reloadCartPage === 'function') {
-          reloadPage();
-        } else {
-          console.log('reloadCartPage is not a function');
-        }
+        reloadPage();
       } else {
           console.error('An error occurred while deleting product');
       }

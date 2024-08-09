@@ -4,13 +4,9 @@ import ProductTile from '../ProductTile'
 import './Home.css'
 
 const Home = () => {
-    const[triggerEffect,setTriggerEffect]=useState(false);
     const[products,setProducts]=useState([]);
     const[filteredProducts,setFilteredProducts]=useState([]);
     const[searchString,setSearchString]=useState('');
-    const toggleTriggerEffect=()=>{
-        setTriggerEffect(prevState => !prevState);
-    }
 
     const getAllProducts=async()=>{
         try {
@@ -40,11 +36,6 @@ const Home = () => {
     }
 
     useEffect(()=>{filterProducts()},[searchString, products])
-    
-    useEffect(
-        ()=>{
-            getAllProducts();
-        }, [triggerEffect]);
 
     return (
         <div>
@@ -55,7 +46,7 @@ const Home = () => {
             </div>
             <div className='products-container' >
                 {filteredProducts.map((product)=>(
-                    <ProductTile key={product._id} reloadPage={toggleTriggerEffect} id={product._id} title={product.name} image={product.image} price={product.salePrice}/>
+                    <ProductTile key={product._id} id={product._id} title={product.name} image={product.image} price={product.salePrice}/>
                 ))}
             </div>
         </div>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import './AddProduct.css'; // Import the CSS file
+import './AddProduct.css';
 import AdminNavBar from './AdminNavBar';
+import { toast } from 'react-toastify';
 
 const AddProduct = () => {
   const [product, setProduct] = useState({
@@ -37,6 +38,7 @@ const AddProduct = () => {
       });
       if (response.ok) {
         console.log('Product added successfully');
+        toast.success('Product added successfully');
         setProduct({
           name: '',
           shortDescription: '',

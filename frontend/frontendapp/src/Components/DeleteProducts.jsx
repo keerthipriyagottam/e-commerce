@@ -3,7 +3,11 @@ import AdminNavBar from './AdminNavBar'
 import ProductTile from './ProductTile';
 
 const DeleteProducts = () => {
-  const[products,setProducts]=useState([]);
+    const[triggerEffect,setTriggerEffect]=useState(false);
+    const[products,setProducts]=useState([]);
+    const toggleTriggerEffect=()=>{
+        setTriggerEffect(prevState => !prevState);
+    }
     const getAllProducts=async()=>{
         try {
             const response= await fetch('http://localhost:8080/product/allProducts',{
@@ -24,13 +28,14 @@ const DeleteProducts = () => {
     useEffect(
         ()=>{
             getAllProducts();
-        }, []);
+        }, [triggerEffect]);
+
   return (
     <>
         <AdminNavBar/>
         <div className='products-container' >
             {products.map((product)=>(
-                <ProductTile pageType='admin' key={product._id} id={product._id} title={product.name} image={product.image} price={product.salePrice}/>
+                <ProductTile pageType='admin' reloadPage={toggleTriggerEffect} key={product._id} id={product._id} title={product.name} image={product.image} price={product.salePrice}/>
             ))}
         </div>
     </>

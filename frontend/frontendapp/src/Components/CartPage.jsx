@@ -3,6 +3,7 @@ import Navbar from './pages/Navbar'
 import CartItem from './CartItem'
 import './CartPage.css'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const CartPage = () => {
   const[cartProducts,setCartProducts]=useState([]);
@@ -72,6 +73,7 @@ const CartPage = () => {
       });
       if(response.ok) {
           console.log('Order placed successfully');
+          toast.success('Order placed successfully');
           emptyCart();
           navigate('/orderHistory');
       } else {
