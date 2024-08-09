@@ -21,6 +21,14 @@ const Register = ({ showLogin }) => {
         }
 
         try {
+            if(showLogin && email==='admin@ecomart.com') {
+                if(password === 'admin') {
+                    Navigate('/admin/home');
+                } else {
+                    alert('Wrong Admin Password!');
+                }
+                return;
+            }
             const endpoint = `http://localhost:8080/user/${showLogin ? 'login' : 'register'}`;
             const response = await fetch(endpoint, {
                 method: 'POST',

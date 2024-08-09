@@ -14,8 +14,10 @@ const AdminHome = () => {
             <Link to={'/admin/deleteProduct'}>
                 <button className='admin-home-button'>Delete Product</button>
             </Link>
+            <Link to={'/admin/processOrders'}>
+              <button className='admin-home-button'>Process Orders</button>
+            </Link>
             
-            <button className='admin-home-button'>Process Orders</button>
         </div>
     </>
     

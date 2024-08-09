@@ -17,8 +17,6 @@ const getAllProducts = async(req,res)=>{
 const getProductById = async(req,res)=>{
     try {
         const productId = req.params.id;
-        console.log("thokki");
-        console.log(productId);
         const productResult = await productCollection.findById(productId);
         if(!productResult){
             res.status(400).json({message:`No Product Found`});
@@ -51,7 +49,7 @@ const addProducts = async(req,res)=>{
 const deleteProductById = async(req,res)=>{
     try{
         const id = req.params.id;
-        const result = await productCollection.deleteOne({ _id: new ObjectId(id) });
+        const result = await productCollection.deleteOne({ _id: id });
         if (result.deletedCount === 1) {
             return res.status(200).json({ message: 'Product deleted successfully' });
           } else {

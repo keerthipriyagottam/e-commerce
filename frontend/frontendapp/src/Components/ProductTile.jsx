@@ -3,7 +3,7 @@ import './ProductTile.css';
 import { Link } from 'react-router-dom';
 import { updateCart } from '../utility/updateCart';
 
-const ProductTile = ({ reloadCartPage, pageType,id,image, title, price }) => {
+const ProductTile = ({ pageType,id,reloadPage,image, title, price }) => {
   const handleDelete=async()=>{
     try {
       const response= await fetch(`http://localhost:8080/product/deleteProduct/${id}`,{
@@ -12,7 +12,11 @@ const ProductTile = ({ reloadCartPage, pageType,id,image, title, price }) => {
       });
       if(response.ok) {
         console.log('Product deleted successfully');
-        await reloadCartPage();
+        if (typeof reloadCartPage === 'function') {
+          reloadPage();
+        } else {
+          console.log('reloadCartPage is not a function');
+        }
       } else {
           console.error('An error occurred while deleting product');
       }

@@ -7,6 +7,7 @@ import CartPage from './Components/CartPage';
 import AdminHome from './Components/AdminHome.jsx';
 import AddProduct from './Components/AddProduct.jsx';
 import DeleteProducts from './Components/DeleteProducts.jsx';
+import ProcessOrders from './Components/ProcessOrders.jsx';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
                 <Route path='/admin/addProduct' element={<AddProduct/>}/>
                 <Route path='/admin/home' element={<AdminHome/>}/>
                 <Route path='/admin/deleteProduct' element={<DeleteProducts/>}/>
+                <Route path='/admin/processOrders' element={<ProcessOrders/>}/>
             </Routes>
         </Router>
    
